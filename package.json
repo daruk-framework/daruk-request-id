@@ -1,0 +1,23 @@
+{
+  "name": "@sina/daruk-request-id",
+  "version": "0.1.0",
+  "description": "koa request id",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@gitlab.weibo.cn:2222/daruk/daruk-request-id.git"
+  },
+  "keywords": [
+    "koa",
+    "request id"
+  ],
+  "author": "jingyu16",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^3.3.2"
+  }
+}
