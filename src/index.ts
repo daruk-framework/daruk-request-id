@@ -36,7 +36,7 @@ export interface Options {
   inject?: boolean;
 }
 
-function xRequestId (options: Options, app: any) {
+export function xRequestId (options: Options, app: any) {
   options = options || {}
   const key = options.key || HTTP_X_REQUEST_ID_HEADER
   const noHyphen = !!options.noHyphen
@@ -66,5 +66,3 @@ function xRequestId (options: Options, app: any) {
     return next()
   }
 }
-
-module.exports = xRequestId;
