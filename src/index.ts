@@ -3,9 +3,7 @@
  * 主要是升级 uuid 包
  */
 
-'use strict'
-
-/*!
+ /*!
  * x-request-id
  * Copyright(c) 2015 Fangdun Cai
  * MIT Licensed
@@ -15,8 +13,9 @@
  * Module dependences.
  */
 
-const uuid = require('uuid/v4')
-const HTTP_X_REQUEST_ID_HEADER = 'X-Request-Id'
+import uuid from "uuid/v4";
+
+const HTTP_X_REQUEST_ID_HEADER = 'X-Request-Id';
 
 /**
  * X-Request-Id:
@@ -31,17 +30,19 @@ const HTTP_X_REQUEST_ID_HEADER = 'X-Request-Id'
  * @api public
  */
 
-module.exports = xRequestId
+export interface Options {
+  key?: string;
+  noHyphen?: boolean;
+  inject?: boolean;
+}
 
-function xRequestId (options, app) {
+export function xRequestId (options: Options, app: any) {
   options = options || {}
   const key = options.key || HTTP_X_REQUEST_ID_HEADER
   const noHyphen = !!options.noHyphen
   const inject = !!options.inject
-
   if (inject) {
     if (!app) throw new TypeError('`app` must be required!')
-
     Object.defineProperty(app.request, 'id', {
       get: function () {
         return this._id
@@ -56,8 +57,8 @@ function xRequestId (options, app) {
       }
     })
   }
-
-  return (ctx, next) => {
+  /// 没法引用 Daruk 类型
+  return (ctx: any, next: Function) => {
     var id = ctx.id || ctx.query[key] || ctx.get(key) || uuid()
     if (noHyphen) id = id.replace(/-/g, '')
     if (inject) ctx.request.id = id

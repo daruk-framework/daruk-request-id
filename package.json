@@ -1,23 +1,27 @@
 {
-  "name": "@sina/daruk-request-id",
-  "version": "0.1.0",
+  "name": "daruk-request-id",
+  "version": "0.3.0",
   "description": "koa request id",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "main": "./lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@gitlab.weibo.cn:2222/daruk/daruk-request-id.git"
+    "url": "git@github.com:daruk-framework/daruk-request-id.git"
   },
   "keywords": [
     "koa",
     "request id"
   ],
   "author": "jingyu16",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
+    "@types/uuid": "^3.4.4",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "typescript": "^3.4.5"
   }
 }
