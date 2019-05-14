@@ -4,6 +4,8 @@ interface Options {
   inject?: boolean;
 }
 
-declare function xRequestId(options: Options, app:any) : Function
+declare function xRequestId (options: Options, app: any): Function
 
-export = xRequestId
+export {
+  xRequestId
+}

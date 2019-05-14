@@ -3,17 +3,17 @@
  * 主要是升级 uuid 包
  */
 
- /*!
- * x-request-id
- * Copyright(c) 2015 Fangdun Cai
- * MIT Licensed
- */
+/*!
+* x-request-id
+* Copyright(c) 2015 Fangdun Cai
+* MIT Licensed
+*/
 
 /**
  * Module dependences.
  */
 
-import uuid from "uuid/v4";
+import uuid from 'uuid/v4';
 
 const HTTP_X_REQUEST_ID_HEADER = 'X-Request-Id';
 
@@ -25,8 +25,8 @@ const HTTP_X_REQUEST_ID_HEADER = 'X-Request-Id';
  * `X-Request-Id`.
  *
  * @param {string} [key=HTTP_X_REQUEST_ID_HEADER]
- * @param {bool} [noHyphen=false]
- * @param {bool} [inject=false]
+ * @param {boolean} [noHyphen=false]
+ * @param {boolean} [inject=false]
  * @api public
  */
 
@@ -37,12 +37,12 @@ export interface Options {
 }
 
 export function xRequestId (options: Options, app: any) {
-  options = options || {}
-  const key = options.key || HTTP_X_REQUEST_ID_HEADER
-  const noHyphen = !!options.noHyphen
-  const inject = !!options.inject
+  options = options || {};
+  const key = options.key || HTTP_X_REQUEST_ID_HEADER;
+  const noHyphen = !!options.noHyphen;
+  const inject = !!options.inject;
   if (inject) {
-    if (!app) throw new TypeError('`app` must be required!')
+    if (!app) throw new TypeError('`app` must be required!');
     Object.defineProperty(app.request, 'id', {
       get: function () {
         return this._id
@@ -50,7 +50,7 @@ export function xRequestId (options: Options, app: any) {
       set: function (id) {
         this._id = id
       }
-    })
+    });
     Object.defineProperty(app.context, 'id', {
       get: function () {
         return this.request.id
@@ -59,10 +59,10 @@ export function xRequestId (options: Options, app: any) {
   }
   /// 没法引用 Daruk 类型
   return (ctx: any, next: Function) => {
-    var id = ctx.id || ctx.query[key] || ctx.get(key) || uuid()
-    if (noHyphen) id = id.replace(/-/g, '')
-    if (inject) ctx.request.id = id
-    ctx.set(key, id)
+    var id = ctx.id || ctx.query[key] || ctx.get(key) || uuid();
+    if (noHyphen) id = id.replace(/-/g, '');
+    if (inject) ctx.request.id = id;
+    ctx.set(key, id);
     return next()
   }
 }
